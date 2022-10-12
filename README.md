@@ -3,4 +3,4 @@ SKUD
 Система мониторинга посещаемости студентов.
 
 Клиентское приложение лежит в другом репозитории по ссылке:
-http://git.students.it-college.ru:8080/git/i21s585/skud-frontend.git
+http://git.students.it-college.ru:8080/i21s585/skud-frontend
