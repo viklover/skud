@@ -171,3 +171,6 @@ fabric.properties
 *.xhtml
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,web,database
+
+src/main/resources/configs/*
+!src/main/resources/configs/.gitkeep
