@@ -1,36 +1,39 @@
 
-CREATE TABLE card (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL
+create table card
+(
+    id  integer primary key auto_increment not null
 );
 
-CREATE TABLE event (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    card_id INTEGER NOT NULL,
-    date INTEGER,
-    event_type varchar(64) NOT NULL,
-    FOREIGN KEY (card_id) references card (id) on delete CASCADE
+create table event
+(
+    id          integer primary key auto_increment not null ,
+    card_id     integer not null,
+    date        integer,
+    event_type  varchar(64) not null,
+    foreign key (card_id) references card (id) on delete cascade
 );
 
-CREATE TABLE student (
-    id VARCHAR(8) PRIMARY KEY NOT NULL,
-    card_id INTEGER,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    FOREIGN KEY (card_id) references card (id) on delete SET NULL
+create table student
+(
+    id          varchar(8) primary key not null ,
+    card_id     integer,
+    first_name  varchar(100) not null,
+    last_name   varchar(100) not null,
+    foreign key (card_id) references card (id) on delete set null
 );
 
-CREATE TABLE parent (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    student_id VARCHAR(8) NOT NULL,
-    telephone_number VARCHAR(12) NOT NULL,
-    FOREIGN KEY (student_id) references student (id) on delete CASCADE
+create table parent (
+    id               integer primary key auto_increment not null,
+    first_name       varchar(100) not null,
+    last_name        varchar(100) not null,
+    student_id       varchar(8) not null,
+    telephone_number varchar(12) not null,
+    foreign key (student_id) references student (id) on delete cascade
 );
 
-CREATE TABLE notification_settings (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    parent_id INTEGER NOT NULL,
-    FOREIGN KEY (parent_id) references parent (id) on delete CASCADE
+create table notification_settings (
+    id        integer primary key auto_increment not null,
+    parent_id integer not null,
+    foreign key (parent_id) references parent (id) on delete cascade
 );
 
