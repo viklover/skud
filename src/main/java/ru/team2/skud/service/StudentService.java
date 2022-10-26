@@ -20,7 +20,7 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public Mono<Student> findById(Long id) {
+    public Mono<Student> findById(String id) {
         return studentRepository.findById(id);
     }
 

@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 import ru.team2.skud.model.Student;
 
 @Repository
-public interface StudentRepository extends ReactiveCrudRepository<Student, Long> {
+public interface StudentRepository extends ReactiveCrudRepository<Student, String> {
 
     @Query("select * from student where card_id=?")
     Mono<Student> findStudentByCardId(Long cardId);
