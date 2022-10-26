@@ -1,4 +1,4 @@
-package ru.team2.skud.domain;
+package ru.team2.skud.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
