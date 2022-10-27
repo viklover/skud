@@ -1,6 +1,7 @@
 package ru.team2.skud.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -25,7 +26,7 @@ public class EventService {
     }
 
     public Flux<Event> findAll() {
-        return eventRepository.findAll()
+        return eventRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
                 .map(eventMapper::toResource)
                 .flatMap(this::loadRelations);
     }
