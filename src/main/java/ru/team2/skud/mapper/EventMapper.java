@@ -9,9 +9,6 @@ import ru.team2.skud.rest.api.NewEventResource;
 @Mapper(componentModel = "spring", uses = {StudentMapper.class})
 public abstract class EventMapper {
 
-    @Autowired
-    private StudentMapper studentMapper;
-
     public abstract Event toResource(Event item);
 
     @Mapping(target = "id", ignore = true)
