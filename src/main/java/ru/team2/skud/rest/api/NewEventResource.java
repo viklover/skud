@@ -16,8 +16,6 @@ public class NewEventResource {
     @JsonProperty("card_id")
     private Long cardId;
 
-    private Long date;
-
     @JsonProperty("event_type")
     private EventType eventType;
 }
