@@ -8,7 +8,7 @@ create table event
 (
     id          integer primary key auto_increment not null ,
     card_id     integer not null,
-    date        integer,
+    date        bigint,
     event_type  varchar(64) not null,
     foreign key (card_id) references card (id) on delete cascade
 );
