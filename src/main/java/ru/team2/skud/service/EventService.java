@@ -17,7 +17,6 @@ public class EventService {
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
     private final StudentService studentService;
-    private final CardService cardService;
 
     public Mono<Event> create(NewEventResource event) {
         return eventRepository.save(eventMapper.toModel(event))
@@ -27,7 +26,6 @@ public class EventService {
 
     public Flux<Event> findAll() {
         return eventRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
-                .map(eventMapper::toResource)
                 .flatMap(this::loadRelations);
     }
 
@@ -40,8 +38,6 @@ public class EventService {
     private Mono<Event> loadRelations(final Event event) {
         return Mono.just(event)
                 .zipWith(studentService.findStudentByCardId(event.getCardId()))
-                .map(result -> result.getT1().setStudent(result.getT2()))
-                .zipWith(cardService.findById(event.getCardId()))
-                .map(result -> result.getT1().setCard(result.getT2()));
+                .map(result -> result.getT1().setStudent(result.getT2()));
     }
 }

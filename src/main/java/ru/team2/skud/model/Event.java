@@ -22,10 +22,6 @@ public class Event {
     @JsonProperty("card_id")
     private Long cardId;
 
-    @Transient
-    @JsonIgnore
-    private Card card;
-
     private Long date;
 
     @JsonProperty("event_type")
