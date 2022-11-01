@@ -2,6 +2,7 @@ package ru.team2.skud.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import ru.team2.skud.repository.StudentRepository;
 import ru.team2.skud.rest.api.NewStudentResource;
 
 @Service
-@CacheConfig(cacheNames = "students")
+@CacheConfig(cacheNames = {"students", "student_by_card"})
 @RequiredArgsConstructor
 public class StudentService {
     private final StudentRepository studentRepository;
@@ -24,8 +25,9 @@ public class StudentService {
     }
 
     @CachePut(key = "#student.id")
+    @CacheEvict(value = "student_by_card", key = "#student.cardId")
     public Mono<Student> update(NewStudentResource student) {
-        return studentRepository.save(studentMapper.toModel(student));
+        return studentRepository.save(studentMapper.toModel(student)).cache();
     }
 
     public Flux<Student> findAll() {
@@ -34,10 +36,11 @@ public class StudentService {
 
     @Cacheable
     public Mono<Student> findById(String id) {
-        return studentRepository.findById(id);
+        return studentRepository.findById(id).cache();
     }
 
+    @Cacheable(value = "student_by_card", key = "#id")
     public Mono<Student> findStudentByCardId(Long id) {
-        return studentRepository.findStudentByCardId(id);
+        return studentRepository.findStudentByCardId(id).cache();
     }
 }

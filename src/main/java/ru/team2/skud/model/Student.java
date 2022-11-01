@@ -20,9 +20,8 @@ public class Student implements Persistable<String> {
     @Id
     private String id;
 
-    @Transient
-    @JsonIgnore
     @Column("card_id")
+    @JsonProperty("card_id")
     private Long cardId;
 
     @Transient

@@ -13,5 +13,6 @@ public abstract class StudentMapper {
     @Mapping(target = "id")
     @Mapping(target = "firstName")
     @Mapping(target = "lastName")
+    @Mapping(target = "cardId")
     public abstract Student toModel(NewStudentResource item);
 }

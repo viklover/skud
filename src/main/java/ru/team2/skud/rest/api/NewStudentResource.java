@@ -21,4 +21,7 @@ public class NewStudentResource {
 
     @JsonProperty("last_name")
     private String lastName;
+
+    @JsonProperty("card_id")
+    private Long cardId;
 }

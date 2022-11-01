@@ -16,7 +16,7 @@ create table event
 create table student
 (
     id          varchar(8) primary key not null ,
-    card_id     integer,
+    card_id     integer unique,
     first_name  varchar(100) not null,
     last_name   varchar(100) not null,
     foreign key (card_id) references card (id) on delete set null
