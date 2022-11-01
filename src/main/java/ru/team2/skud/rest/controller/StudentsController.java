@@ -23,6 +23,11 @@ public class StudentsController {
         return studentService.create(student);
     }
 
+    @PutMapping
+    public Mono<Student> update(final @RequestBody NewStudentResource student) {
+        return studentService.update(student);
+    }
+
     @GetMapping
     public Flux<Student> findAll() {
         return studentService.findAll();
