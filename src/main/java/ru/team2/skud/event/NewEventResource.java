@@ -1,11 +1,10 @@
-package ru.team2.skud.rest.api;
+package ru.team2.skud.event;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import ru.team2.skud.model.EventType;
 
 @Data
 @NoArgsConstructor

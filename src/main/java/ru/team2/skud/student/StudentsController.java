@@ -1,13 +1,10 @@
-package ru.team2.skud.rest.controller;
+package ru.team2.skud.student;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.team2.skud.model.Student;
-import ru.team2.skud.rest.api.NewStudentResource;
-import ru.team2.skud.service.StudentService;
 
 @RestController
 @CrossOrigin

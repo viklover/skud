@@ -1,4 +1,4 @@
-package ru.team2.skud.model;
+package ru.team2.skud.event;
 
 import lombok.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -7,6 +7,7 @@ import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Table;
+import ru.team2.skud.student.Student;
 
 @Getter
 @Setter

@@ -1,12 +1,9 @@
-package ru.team2.skud.rest.controller;
+package ru.team2.skud.event;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.team2.skud.model.Event;
-import ru.team2.skud.rest.api.NewEventResource;
-import ru.team2.skud.service.EventService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

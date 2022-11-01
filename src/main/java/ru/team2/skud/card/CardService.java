@@ -1,11 +1,9 @@
-package ru.team2.skud.service;
+package ru.team2.skud.card;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.team2.skud.model.Card;
-import ru.team2.skud.repository.CardRepository;
 
 @Service
 @RequiredArgsConstructor

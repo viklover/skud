@@ -1,4 +1,6 @@
-package ru.team2.skud.exception;
+package ru.team2.skud.student;
+
+import ru.team2.skud.exception.NotFoundException;
 
 public class StudentNotFoundException extends NotFoundException {
 

@@ -1,15 +1,11 @@
-package ru.team2.skud.service;
+package ru.team2.skud.event;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.team2.skud.model.Event;
-import ru.team2.skud.mapper.EventMapper;
-import ru.team2.skud.rest.api.NewEventResource;
-import ru.team2.skud.exception.EventNotFoundException;
-import ru.team2.skud.repository.EventRepository;
+import ru.team2.skud.student.StudentService;
 
 @Service
 @RequiredArgsConstructor

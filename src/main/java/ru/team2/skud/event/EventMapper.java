@@ -1,11 +1,10 @@
-package ru.team2.skud.mapper;
+package ru.team2.skud.event;
 
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import ru.team2.skud.model.Event;
-import ru.team2.skud.rest.api.NewEventResource;
+import ru.team2.skud.student.StudentMapper;
 
 import java.util.Date;
 

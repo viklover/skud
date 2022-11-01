@@ -1,4 +1,4 @@
-package ru.team2.skud.rest.api;
+package ru.team2.skud.student;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

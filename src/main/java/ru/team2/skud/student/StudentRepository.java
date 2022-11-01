@@ -1,10 +1,9 @@
-package ru.team2.skud.repository;
+package ru.team2.skud.student;
 
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
-import ru.team2.skud.model.Student;
 
 @Repository
 public interface StudentRepository extends ReactiveCrudRepository<Student, String> {

@@ -1,4 +1,4 @@
-package ru.team2.skud.model;
+package ru.team2.skud.event;
 
 public enum EventType {
     ENTRANCE, EXIT

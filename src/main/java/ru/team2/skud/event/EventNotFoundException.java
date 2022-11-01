@@ -1,4 +1,6 @@
-package ru.team2.skud.exception;
+package ru.team2.skud.event;
+
+import ru.team2.skud.exception.NotFoundException;
 
 public class EventNotFoundException extends NotFoundException {
 

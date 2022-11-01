@@ -1,4 +1,4 @@
-package ru.team2.skud.model;
+package ru.team2.skud.student;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
@@ -10,6 +10,7 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
+import ru.team2.skud.card.Card;
 
 @Data
 @Getter

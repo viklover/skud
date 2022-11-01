@@ -1,4 +1,4 @@
-package ru.team2.skud.service;
+package ru.team2.skud.student;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
@@ -8,10 +8,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.team2.skud.mapper.StudentMapper;
-import ru.team2.skud.model.Student;
-import ru.team2.skud.repository.StudentRepository;
-import ru.team2.skud.rest.api.NewStudentResource;
 
 @Service
 @CacheConfig(cacheNames = {"students", "student_by_card"})
