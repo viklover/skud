@@ -1,20 +1,33 @@
-package ru.team2.skud.domain;
+package ru.team2.skud.event;
 
+import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Table;
+import ru.team2.skud.student.Student;
 
-@Data
+@Getter
+@Setter
+@Accessors(chain = true)
 @NoArgsConstructor
 @Table("event")
 public class Event {
+
     @Id
+    @JsonIgnore
     private Long id;
+
     @JsonProperty("card_id")
     private Long cardId;
+
     private Long date;
+
     @JsonProperty("event_type")
     private EventType eventType;
+
+    @Transient
+    private Student student;
 }

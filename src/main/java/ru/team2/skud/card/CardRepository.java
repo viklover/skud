@@ -1,9 +1,8 @@
-package ru.team2.skud.repo;
+package ru.team2.skud.card;
 
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
-import ru.team2.skud.domain.Event;
 
 @Repository
-public interface EventRepo extends ReactiveCrudRepository<Event, Long> {
+public interface CardRepository extends ReactiveCrudRepository<Card, Long> {
 }

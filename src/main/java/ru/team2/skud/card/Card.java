@@ -1,4 +1,4 @@
-package ru.team2.skud.domain;
+package ru.team2.skud.card;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
