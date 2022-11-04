@@ -1,4 +1,4 @@
-package ru.team2.skud.base.maper;
+package ru.team2.skud.base.mapper;
 
 import org.mapstruct.MapperConfig;
 import org.mapstruct.NullValuePropertyMappingStrategy;
@@ -8,4 +8,3 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 )
 public interface BaseMapperConfig {
 }
-

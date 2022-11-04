@@ -1,24 +1,14 @@
 package ru.team2.skud.card;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import ru.team2.skud.base.service.BaseEntityService;
+import ru.team2.skud.card.dto.NewCardDto;
+import ru.team2.skud.card.dto.UpdateCardDto;
 
 @Service
-@RequiredArgsConstructor
-public class CardService {
-    private final CardRepository cardRepository;
+public class CardService extends BaseEntityService<Long, Card, CardRepository, CardMapper, NewCardDto, UpdateCardDto> {
 
-    public Flux<Card> findAll() {
-        return cardRepository.findAll();
-    }
-
-    public Mono<Card> create(Card card) {
-        return cardRepository.save(card);
-    }
-
-    public Mono<Card> findById(Long id) {
-        return cardRepository.findById(id);
+    public CardService(CardRepository repository, CardMapper mapper) {
+        super(repository, mapper);
     }
 }

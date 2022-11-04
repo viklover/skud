@@ -2,25 +2,21 @@ package ru.team2.skud.event;
 
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import ru.team2.skud.base.mapper.BaseMapper;
+import ru.team2.skud.base.mapper.BaseMapperConfig;
 import ru.team2.skud.event.dto.NewEventDto;
-import ru.team2.skud.student.StudentMapper;
+import ru.team2.skud.event.dto.UpdateEventDto;
 
 import java.util.Date;
 
-@Mapper(componentModel = "spring", uses = {StudentMapper.class})
-public abstract class EventMapper {
+@Mapper(componentModel = "spring", config = BaseMapperConfig.class)
+public abstract class EventMapper extends BaseMapper<Long, Event, NewEventDto, UpdateEventDto> {
 
-    public abstract Event toResource(Event item);
-
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "cardId")
-    @Mapping(target = "eventType")
-    public abstract Event toModel(NewEventDto item);
-
+    @Override
     @AfterMapping
-    public void afterMapping(NewEventDto item, @MappingTarget Event event) {
+    public void afterMapping(@MappingTarget Event event, NewEventDto newEventDto) {
+        super.afterMapping(event, newEventDto);
         event.setDate(new Date().getTime());
     }
 }

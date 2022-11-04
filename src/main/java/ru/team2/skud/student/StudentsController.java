@@ -30,6 +30,11 @@ public class StudentsController {
         return studentService.update(id, student);
     }
 
+    @DeleteMapping("/{id}")
+    public Mono<Void> delete(@PathVariable("id") String id) {
+        return studentService.deleteById(id);
+    }
+
     @GetMapping
     public Flux<Student> findAll() {
         return studentService.findAll();

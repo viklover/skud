@@ -28,6 +28,16 @@ public class ParentController {
         return parentService.update(id, parentResource);
     }
 
+    @DeleteMapping("/{id}")
+    public Mono<Void> delete(@PathVariable("id") Long id) {
+        return parentService.deleteById(id);
+    }
+
+    @GetMapping("/{id}")
+    public Mono<Parent> findById(@PathVariable("id") Long id) {
+        return parentService.findById(id);
+    }
+
     @GetMapping
     public Flux<Parent> findAll() {
         return parentService.findAll();
