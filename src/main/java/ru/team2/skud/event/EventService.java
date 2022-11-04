@@ -5,6 +5,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import ru.team2.skud.event.dto.NewEventDto;
 import ru.team2.skud.student.StudentService;
 
 @Service
@@ -14,7 +15,7 @@ public class EventService {
     private final EventMapper eventMapper;
     private final StudentService studentService;
 
-    public Mono<Event> create(NewEventResource event) {
+    public Mono<Event> create(NewEventDto event) {
         return eventRepository.save(eventMapper.toModel(event))
                 .map(eventMapper::toResource)
                 .flatMap(this::loadRelations);

@@ -11,6 +11,8 @@ import org.springframework.data.domain.Persistable;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 import ru.team2.skud.card.Card;
+import ru.team2.skud.parent.Parent;
+import java.util.List;
 
 @Data
 @Getter
@@ -34,6 +36,10 @@ public class Student implements Persistable<String> {
 
     @JsonProperty("last_name")
     private String lastName;
+
+    @Transient
+    @JsonProperty("parents")
+    private List<Parent> parents;
 
     @Transient
     @JsonIgnore

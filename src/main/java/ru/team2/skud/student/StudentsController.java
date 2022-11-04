@@ -5,6 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import ru.team2.skud.db.relations.StudentsParents;
+import ru.team2.skud.db.relations.StudentsParentsService;
+import ru.team2.skud.student.dto.NewStudentDto;
+import ru.team2.skud.student.dto.UpdateStudentDto;
 
 @RestController
 @CrossOrigin
@@ -14,15 +18,16 @@ import reactor.core.publisher.Mono;
 public class StudentsController {
 
     private final StudentService studentService;
+    private final StudentsParentsService studentsParentsService;
 
     @PostMapping
-    public Mono<Student> create(final @RequestBody NewStudentResource student) {
+    public Mono<Student> create(final @RequestBody NewStudentDto student) {
         return studentService.create(student);
     }
 
-    @PutMapping
-    public Mono<Student> update(final @RequestBody NewStudentResource student) {
-        return studentService.update(student);
+    @PutMapping("/{id}")
+    public Mono<Student> update(@PathVariable("id") String id, @RequestBody UpdateStudentDto student) {
+        return studentService.update(id, student);
     }
 
     @GetMapping
@@ -33,5 +38,15 @@ public class StudentsController {
     @GetMapping("/{id}")
     public Mono<Student> findById(@PathVariable("id") String id) {
         return studentService.findById(id);
+    }
+
+    @PostMapping("/{id}/add_parent")
+    public Mono<StudentsParents> addParent(@PathVariable("id") String student_id, @RequestParam Long parent_id) {
+        return studentsParentsService.create(student_id, parent_id);
+    }
+
+    @DeleteMapping("/{id}/delete_parent")
+    public Mono<Void> deleteParent(@PathVariable("id") String student_id, @RequestParam Long parent_id) {
+        return studentsParentsService.deletePair(student_id, parent_id);
     }
 }

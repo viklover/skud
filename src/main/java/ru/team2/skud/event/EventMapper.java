@@ -4,6 +4,7 @@ import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import ru.team2.skud.event.dto.NewEventDto;
 import ru.team2.skud.student.StudentMapper;
 
 import java.util.Date;
@@ -16,10 +17,10 @@ public abstract class EventMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "cardId")
     @Mapping(target = "eventType")
-    public abstract Event toModel(NewEventResource item);
+    public abstract Event toModel(NewEventDto item);
 
     @AfterMapping
-    public void afterMapping(NewEventResource item, @MappingTarget Event event) {
+    public void afterMapping(NewEventDto item, @MappingTarget Event event) {
         event.setDate(new Date().getTime());
     }
 }
