@@ -26,7 +26,7 @@ create table parent
     id               bigint primary key auto_increment not null,
     first_name       varchar(100)                      not null,
     last_name        varchar(100)                      not null,
-    telephone_number varchar(12)                       not null
+    telephone_number varchar(12) unique                not null
 );
 
 create table students_parents
@@ -36,11 +36,3 @@ create table students_parents
     parent_id  bigint                            not null,
     unique key (student_id, parent_id)
 );
-
-create table notification_settings
-(
-    id        bigint primary key auto_increment not null,
-    parent_id bigint                            not null,
-    foreign key (parent_id) references parent (id) on delete cascade
-);
-
