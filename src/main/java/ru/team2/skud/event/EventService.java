@@ -28,6 +28,7 @@ public class EventService extends BaseEntityService<Long, Event, EventRepository
     protected Mono<Event> loadRelations(final Event event) {
         return super.loadRelations(event)
                 .zipWith(studentService.findStudentByCardId(event.getCardId()))
-                .map(result -> result.getT1().setStudent(result.getT2()));
+                .map(result -> result.getT1().setStudent(
+                        studentService.mapper.studentToStudentForEventDto(result.getT2())));
     }
 }

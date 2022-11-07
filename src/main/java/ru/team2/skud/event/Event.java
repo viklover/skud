@@ -6,7 +6,7 @@ import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Table;
 import ru.team2.skud.base.api.PersistableImpl;
-import ru.team2.skud.student.Student;
+import ru.team2.skud.student.dto.StudentForEventDto;
 
 @Getter
 @Setter
@@ -24,5 +24,5 @@ public class Event extends PersistableImpl<Long> {
     private EventType eventType;
 
     @Transient
-    private Student student;
+    private StudentForEventDto student;
 }

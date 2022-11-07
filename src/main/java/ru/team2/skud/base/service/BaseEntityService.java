@@ -18,7 +18,7 @@ public abstract class BaseEntityService<
         UpdateEntityDto> {
 
     protected final Repository repository;
-    protected final Mapper mapper;
+    public final Mapper mapper;
 
     public Mono<Entity> create(NewEntityDto newEntityDto) {
         return repository.save(mapper.newEntityDtoToEntity(newEntityDto))
