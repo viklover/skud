@@ -68,10 +68,8 @@ public class AuthUserService {
         Optional<Boolean> result = parser.compareRegistrationCodes(session.getRegistrationCode());
 
         if (result.get()) {
-            newSessions.remove(message.getSessionId());
-            return userSessionService.create(mapper.notVerifiedSessionToSession(session).setParentId(1L))
-                    .zipWith(parentService.findParentByTelephoneNumber(session.getTelephoneNumber()))
-                    .map(tuple -> tuple.getT1().setParentId(tuple.getT2().getId()))
+            return parentService.findParentByTelephoneNumber(session.getTelephoneNumber())
+                    .flatMap(parent -> userSessionService.create(mapper.notVerifiedSessionToSession(session).setParentId(parent.getId())))
                     .flatMap(i -> ResponseMessage.create("Вы авторизованы :)"));
         }
 
