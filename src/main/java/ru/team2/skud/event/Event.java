@@ -1,12 +1,14 @@
 package ru.team2.skud.event;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Table;
 import ru.team2.skud.base.api.PersistableImpl;
-import ru.team2.skud.student.dto.StudentForEventDto;
+import ru.team2.skud.persons.student.Student;
+import ru.team2.skud.persons.student.dto.StudentForEventDto;
 
 @Getter
 @Setter
@@ -24,5 +26,10 @@ public class Event extends PersistableImpl<Long> {
     private EventType eventType;
 
     @Transient
-    private StudentForEventDto student;
+    @JsonProperty("student")
+    private StudentForEventDto studentDto;
+
+    @Transient
+    @JsonIgnore
+    private Student student;
 }
