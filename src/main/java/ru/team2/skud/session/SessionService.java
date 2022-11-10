@@ -7,27 +7,28 @@ import reactor.core.publisher.Mono;
 import ru.team2.skud.persons.parent.ParentService;
 import ru.team2.skud.session.config.SessionConfig;
 import ru.team2.skud.session.config.SessionConfigRepository;
+import ru.team2.skud.session.platform.PlatformType;
 
 import java.util.List;
 import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class UserSessionService {
+public class SessionService {
 
-    private final UserSessionRepository userSessionRepository;
+    private final SessionRepository userSessionRepository;
 
     private final SessionConfigRepository sessionConfigRepository;
     private final ParentService parentService;
 
-    public Mono<UserSession> create(UserSession session) {
+    public Mono<Session> create(Session session) {
         return Mono.just(session)
                 .zipWith(sessionConfigRepository.save(new SessionConfig()))
                 .map(tuple -> tuple.getT1().setSessionConfigId(tuple.getT2().getId()))
                 .flatMap(userSessionRepository::save);
     }
 
-    public Flux<UserSession> findUserSessionByListParentIds(List<Long> parentIdsList) {
+    public Flux<Session> findUserSessionByListParentIds(List<Long> parentIdsList) {
         return userSessionRepository.findUserSessionByParentIdIn(parentIdsList);
     }
 

@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import ru.team2.skud.session.AuthUserService;
 import ru.team2.skud.session.request.NewMessage;
-import ru.team2.skud.session.PlatformType;
+import ru.team2.skud.session.platform.PlatformType;
 import ru.team2.skud.session.request.ResponseMessage;
-import ru.team2.skud.session.UserSessionService;
+import ru.team2.skud.session.SessionService;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +17,7 @@ public class TelegramService {
 
     private final PlatformType PLATFORM = PlatformType.TELEGRAM;
 
-    private final UserSessionService sessionService;
+    private final SessionService sessionService;
 
     private final AuthUserService authUserService;
 

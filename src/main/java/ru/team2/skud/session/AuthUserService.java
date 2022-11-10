@@ -16,8 +16,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthUserService {
 
-    private final UserSessionService userSessionService;
-    private final UserSessionMapper mapper;
+    private final SessionService userSessionService;
+    private final SessionMapper mapper;
     private final Map<Long, NotVerifiedUserSession> newSessions = new HashMap<>();
 
     private final ParentService parentService;

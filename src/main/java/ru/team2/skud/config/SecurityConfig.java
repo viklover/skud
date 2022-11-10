@@ -1,4 +1,4 @@
-package ru.team2.skud.security;
+package ru.team2.skud.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

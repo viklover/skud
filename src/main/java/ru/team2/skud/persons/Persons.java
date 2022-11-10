@@ -12,7 +12,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Setter
 @Accessors(chain = true)
 @Table("students_parents")
-public class StudentsParents {
+public class Persons {
     @Id
     private Long id;
     private String studentId;

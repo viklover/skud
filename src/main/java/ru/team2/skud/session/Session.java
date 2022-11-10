@@ -9,11 +9,12 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 import ru.team2.skud.session.config.SessionConfig;
+import ru.team2.skud.session.platform.PlatformType;
 
 @Data
 @Table("user_session")
 @Accessors(chain = true)
-public class UserSession {
+public class Session {
     @Id
     private Long id;
 

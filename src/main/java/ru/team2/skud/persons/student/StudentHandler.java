@@ -7,8 +7,8 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-import ru.team2.skud.persons.StudentsParents;
-import ru.team2.skud.persons.StudentsParentsService;
+import ru.team2.skud.persons.Persons;
+import ru.team2.skud.persons.PersonsService;
 import ru.team2.skud.persons.student.dto.NewStudentDto;
 import ru.team2.skud.persons.student.dto.UpdateStudentDto;
 
@@ -20,7 +20,7 @@ import static org.springframework.web.reactive.function.server.ServerResponse.st
 public class StudentHandler {
 
     private final StudentService studentService;
-    private final StudentsParentsService studentsParentsService;
+    private final PersonsService studentsParentsService;
 
     public Mono<ServerResponse> createStudent(ServerRequest serverRequest) {
         return serverRequest.bodyToMono(NewStudentDto.class)
@@ -46,7 +46,7 @@ public class StudentHandler {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(studentsParentsService.create(
                         (serverRequest.pathVariable("id")),
-                        (Long.valueOf(serverRequest.queryParam("parent_id").get()))), StudentsParents.class);
+                        (Long.valueOf(serverRequest.queryParam("parent_id").get()))), Persons.class);
     }
 
     public Mono<ServerResponse> deleteParentToStudentById(ServerRequest serverRequest) {
@@ -58,7 +58,7 @@ public class StudentHandler {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(studentsParentsService.deletePair(
                         (serverRequest.pathVariable("id")),
-                        (Long.valueOf(serverRequest.queryParam("parent_id").get()))), StudentsParents.class);
+                        (Long.valueOf(serverRequest.queryParam("parent_id").get()))), Persons.class);
     }
 
     public Mono<ServerResponse> findAllStudents(ServerRequest serverRequest) {

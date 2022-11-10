@@ -9,10 +9,10 @@ import ru.team2.skud.persons.parent.Parent;
 import ru.team2.skud.persons.student.Student;
 
 @Repository
-public interface StudentsParentsRepository extends ReactiveCrudRepository<StudentsParents, Long> {
+public interface PersonsRepository extends ReactiveCrudRepository<Persons, Long> {
 
     @Query("select * from students_parents where student_id=? and parent_id=?")
-    Mono<StudentsParents> findPairByIds(String student_id, Long parent_id);
+    Mono<Persons> findPairByIds(String student_id, Long parent_id);
 
     @Query("select * from student where id in (select student_id from students_parents where parent_id=?)")
     Flux<Student> findStudentsByParentId(Long id);

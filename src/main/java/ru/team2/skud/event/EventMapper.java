@@ -3,7 +3,7 @@ package ru.team2.skud.event;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
-import ru.team2.skud.mapper.MapperConfig;
+import ru.team2.skud.config.mapper.MapperConfig;
 import ru.team2.skud.event.dto.NewEventDto;
 
 import java.util.Date;

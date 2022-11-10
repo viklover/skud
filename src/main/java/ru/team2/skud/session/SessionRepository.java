@@ -5,15 +5,16 @@ import org.springframework.data.repository.reactive.ReactiveSortingRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import ru.team2.skud.session.platform.PlatformType;
 
 import java.util.List;
 
 @Repository
-public interface UserSessionRepository extends ReactiveSortingRepository<UserSession, Long> {
+public interface SessionRepository extends ReactiveSortingRepository<Session, Long> {
 
-    Flux<UserSession> findUserSessionByParentIdIn(List<Long> parentIdsList);
+    Flux<Session> findUserSessionByParentIdIn(List<Long> parentIdsList);
 
-    Mono<UserSession> findUserSessionByParentId(Long parentId);
+    Mono<Session> findUserSessionByParentId(Long parentId);
 
     Mono<Boolean> existsUserSessionByParentId(Long parentId);
 

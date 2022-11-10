@@ -1,4 +1,4 @@
-package ru.team2.skud.webclient;
+package ru.team2.skud.config.webclient;
 
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 @Configuration
 @PropertySource("classpath:configs/services.properties")
-public class WebClientConfiguration {
+public class WebClientConfig {
 
     @Value("${telegram.url}")
     public static String TELEGRAM_BASE_URL;

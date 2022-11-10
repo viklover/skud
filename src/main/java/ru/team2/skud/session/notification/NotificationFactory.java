@@ -1,19 +1,16 @@
 package ru.team2.skud.session.notification;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
 import ru.team2.skud.event.Event;
-import ru.team2.skud.session.UserSession;
-import ru.team2.skud.session.UserSessionService;
+import ru.team2.skud.session.Session;
+import ru.team2.skud.session.SessionService;
 
 @Service
 public class NotificationFactory {
 
-    private UserSessionService userSessionService;
+    private SessionService userSessionService;
 
-    public static Notification create(Event event, UserSession session) {
+    public static Notification create(Event event, Session session) {
 
         // TODO: CREATING NOTIFICATIONS
 

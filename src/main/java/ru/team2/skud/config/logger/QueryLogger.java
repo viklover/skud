@@ -1,4 +1,4 @@
-package ru.team2.skud.logger;
+package ru.team2.skud.config.logger;
 
 import dev.miku.r2dbc.mysql.ConnectionContext;
 import org.springframework.context.annotation.Configuration;

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.team2.skud.persons.StudentsParentsRepository;
+import ru.team2.skud.persons.PersonsRepository;
 import ru.team2.skud.persons.parent.ParentService;
 import ru.team2.skud.persons.student.dto.NewStudentDto;
 import ru.team2.skud.persons.student.dto.UpdateStudentDto;
@@ -16,7 +16,7 @@ public class StudentService {
     private final StudentRepository studentRepository;
     public final StudentMapper studentMapper;
 
-    private final StudentsParentsRepository studentsParentsRepository;
+    private final PersonsRepository studentsParentsRepository;
     private final ParentService parentService;
 
     public Mono<Student> create(NewStudentDto newStudentDto) {

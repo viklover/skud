@@ -3,7 +3,7 @@ package ru.team2.skud.persons.student;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
-import ru.team2.skud.mapper.MapperConfig;
+import ru.team2.skud.config.mapper.MapperConfig;
 import ru.team2.skud.persons.student.dto.NewStudentDto;
 import ru.team2.skud.persons.student.dto.StudentForEventDto;
 import ru.team2.skud.persons.student.dto.UpdateStudentDto;

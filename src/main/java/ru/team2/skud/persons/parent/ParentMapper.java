@@ -1,7 +1,7 @@
 package ru.team2.skud.persons.parent;
 
 import org.mapstruct.*;
-import ru.team2.skud.mapper.MapperConfig;
+import ru.team2.skud.config.mapper.MapperConfig;
 import ru.team2.skud.persons.parent.dto.NewParentDto;
 import ru.team2.skud.persons.parent.dto.UpdateParentDto;
 

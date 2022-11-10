@@ -1,4 +1,4 @@
-package ru.team2.skud.mapper;
+package ru.team2.skud.config.mapper;
 
 import org.mapstruct.NullValuePropertyMappingStrategy;
 

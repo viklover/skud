@@ -6,12 +6,12 @@ import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-public class StudentsParentsService {
+public class PersonsService {
 
-    private final StudentsParentsRepository studentsParentsRepository;
+    private final PersonsRepository studentsParentsRepository;
 
-    public Mono<StudentsParents> create(String student_id, Long parent_id) {
-        return studentsParentsRepository.save(new StudentsParents().setStudentId(student_id).setParentId(parent_id));
+    public Mono<Persons> create(String student_id, Long parent_id) {
+        return studentsParentsRepository.save(new Persons().setStudentId(student_id).setParentId(parent_id));
     }
 
     public Mono<Void> deletePair(String student_id, Long parent_id) {

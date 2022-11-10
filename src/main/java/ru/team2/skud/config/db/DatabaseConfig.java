@@ -1,4 +1,4 @@
-package ru.team2.skud.db;
+package ru.team2.skud.config.db;
 
 import io.r2dbc.spi.ConnectionFactories;
 import io.r2dbc.spi.ConnectionFactory;
@@ -16,9 +16,9 @@ import static io.r2dbc.spi.ConnectionFactoryOptions.PORT;
 
 @Configuration
 @PropertySource("classpath:configs/database.properties")
-public class DatabaseConfiguration {
+public class DatabaseConfig {
 
-    private static final Log log = LogFactory.getLog(DatabaseConfiguration.class);
+    private static final Log log = LogFactory.getLog(DatabaseConfig.class);
     @Value("${user}") public String user;
     @Value("${password}") public String password;
     @Value("${host}") public String host;

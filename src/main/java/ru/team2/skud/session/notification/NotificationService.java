@@ -6,12 +6,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.team2.skud.event.Event;
 import ru.team2.skud.persons.parent.ParentService;
-import ru.team2.skud.session.UserSession;
-import ru.team2.skud.session.UserSessionService;
+import ru.team2.skud.session.Session;
+import ru.team2.skud.session.SessionService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Flow;
 import java.util.stream.Collectors;
 
 
@@ -21,13 +20,13 @@ public class NotificationService {
 
     private final NotificationRepository notificationRepository;
     private final NotificationFactory notificationFactory;
-    private final UserSessionService userSessionService;
+    private final SessionService userSessionService;
     private final ParentService parentService;
 
     public void initNotifications(Event event) {
         List<Notification> notificationsList = new ArrayList<Notification>();
 
-        Flux<UserSession> userSessions = userSessionService.findUserSessionByListParentIds(
+        Flux<Session> userSessions = userSessionService.findUserSessionByListParentIds(
                 event.getStudent().getParents().stream().map(parent -> parent.getId()).collect(Collectors.toList()));
 
         userSessions.doOnEach(sessions -> {

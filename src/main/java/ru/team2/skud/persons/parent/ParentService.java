@@ -1,11 +1,10 @@
 package ru.team2.skud.persons.parent;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.team2.skud.persons.StudentsParentsRepository;
+import ru.team2.skud.persons.PersonsRepository;
 import ru.team2.skud.persons.parent.dto.NewParentDto;
 import ru.team2.skud.persons.parent.dto.UpdateParentDto;
 
@@ -16,7 +15,7 @@ public class ParentService {
     private final ParentRepository parentRepository;
     private final ParentMapper parentMapper;
 
-    private final StudentsParentsRepository studentsParentsRepository;
+    private final PersonsRepository studentsParentsRepository;
 
     public Mono<Parent> create(NewParentDto newEntityDto) {
         return parentRepository.save(parentMapper.newParentDtoToParent(newEntityDto));
