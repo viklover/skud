@@ -23,7 +23,7 @@ public class EventService {
         return eventRepository.save(eventMapper.newEventDtoToEvent(newEventDto))
                 .flatMap(this::loadStudentRelation)
                 .flatMap(this::loadStudentDtoRelation)
-                .doOnNext(notificationService::createNotificationsFromEvent);
+                .doOnNext(notificationService::initNotifications);
     }
 
     public Mono<Event> findById(Long id) {

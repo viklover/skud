@@ -13,6 +13,13 @@ public class NotificationFactory {
 
     private UserSessionService userSessionService;
 
+    public static Notification create(Event event, UserSession session) {
+
+        // TODO: CREATING NOTIFICATIONS
+
+        return new Notification();
+    }
+
 
 //    public static Notification fromEvent(Event event, UserSession userSession) {
 //

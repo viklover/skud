@@ -7,7 +7,7 @@ create table card
 create table event
 (
     id         integer primary key auto_increment not null,
-    card_id    bigint                            not null,
+    card_id    bigint                             not null,
     date       bigint,
     event_type varchar(64)                        not null
 );
@@ -25,7 +25,7 @@ create table parent
     id               bigint primary key auto_increment not null,
     first_name       varchar(100)                      not null,
     last_name        varchar(100)                      not null,
-    telephone_number varchar(12)                       not null
+    telephone_number varchar(12) unique                not null
 );
 
 create table students_parents

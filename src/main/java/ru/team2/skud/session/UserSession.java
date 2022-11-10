@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 import ru.team2.skud.session.config.SessionConfig;
 
@@ -24,6 +25,7 @@ public class UserSession {
     private PlatformType platform;
 
     @JsonIgnore
+    @Column("config_id")
     private Long sessionConfigId;
 
     @Transient
