@@ -1,11 +1,18 @@
 package ru.team2.skud.persons.parent;
 
 import org.mapstruct.*;
-import ru.team2.skud.base.mapper.BaseMapperConfig;
-import ru.team2.skud.base.mapper.BaseMapper;
+import ru.team2.skud.mapper.MapperConfig;
 import ru.team2.skud.persons.parent.dto.NewParentDto;
 import ru.team2.skud.persons.parent.dto.UpdateParentDto;
 
-@Mapper(componentModel = "spring", config = BaseMapperConfig.class)
-public abstract class ParentMapper extends BaseMapper<Long, Parent, NewParentDto, UpdateParentDto> {
+@Mapper(componentModel = "spring", config = MapperConfig.class)
+public abstract class ParentMapper {
+    public abstract Parent newParentDtoToParent(NewParentDto newParentDto);
+
+    @AfterMapping
+    public void afterMapping(@MappingTarget Parent parent, NewParentDto newParentDto) {
+        parent.setNew(true);
+    }
+
+    public abstract void updateParentDtoToParent(@MappingTarget Parent parent, UpdateParentDto updateParentDto);
 }

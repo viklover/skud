@@ -3,13 +3,13 @@ package ru.team2.skud.session;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
-import ru.team2.skud.base.mapper.BaseMapperConfig;
+import ru.team2.skud.mapper.MapperConfig;
 import ru.team2.skud.session.request.NewMessage;
 import ru.team2.skud.session.request.ResponseMessage;
 
 import java.util.Random;
 
-@Mapper(componentModel = "spring", config = BaseMapperConfig.class)
+@Mapper(componentModel = "spring", config = MapperConfig.class)
 public abstract class UserSessionMapper {
 
     public abstract UserSession notVerifiedSessionToSession(NotVerifiedUserSession newEntityDto);

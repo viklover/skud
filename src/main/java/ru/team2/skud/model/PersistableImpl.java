@@ -1,4 +1,4 @@
-package ru.team2.skud.base.api;
+package ru.team2.skud.model;
 
 import lombok.Data;
 import lombok.Getter;

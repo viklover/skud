@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.springframework.data.relational.core.mapping.Table;
-import ru.team2.skud.base.api.PersistableImpl;
+import ru.team2.skud.model.PersistableImpl;
 
 @Data
 @Getter

@@ -1,10 +1,9 @@
-package ru.team2.skud.base.mapper;
+package ru.team2.skud.mapper;
 
-import org.mapstruct.MapperConfig;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@MapperConfig(
+@org.mapstruct.MapperConfig(
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
 )
-public interface BaseMapperConfig {
+public interface MapperConfig {
 }

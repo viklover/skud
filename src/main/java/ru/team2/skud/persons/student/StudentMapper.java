@@ -1,14 +1,23 @@
 package ru.team2.skud.persons.student;
 
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
-import ru.team2.skud.base.mapper.BaseMapper;
-import ru.team2.skud.base.mapper.BaseMapperConfig;
+import org.mapstruct.MappingTarget;
+import ru.team2.skud.mapper.MapperConfig;
 import ru.team2.skud.persons.student.dto.NewStudentDto;
 import ru.team2.skud.persons.student.dto.StudentForEventDto;
 import ru.team2.skud.persons.student.dto.UpdateStudentDto;
 
-@Mapper(componentModel = "spring", config = BaseMapperConfig.class)
-public abstract class StudentMapper extends BaseMapper<String, Student, NewStudentDto, UpdateStudentDto> {
+@Mapper(componentModel = "spring", config = MapperConfig.class)
+public abstract class StudentMapper {
+    public abstract Student newStudentDtoToStudent(NewStudentDto newStudentDto);
+
+    @AfterMapping
+    public void afterMapping(@MappingTarget Student student, NewStudentDto newStudentDto) {
+        student.setNew(true);
+    }
+
+    public abstract void updateStudentDtoToStudent(@MappingTarget Student student, UpdateStudentDto updateStudentDto);
 
     public abstract StudentForEventDto studentToStudentForEventDto(Student student);
 }

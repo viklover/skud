@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
-import ru.team2.skud.base.api.PersistableImpl;
+import ru.team2.skud.model.PersistableImpl;
 import ru.team2.skud.card.Card;
 import ru.team2.skud.persons.parent.Parent;
 import java.util.List;

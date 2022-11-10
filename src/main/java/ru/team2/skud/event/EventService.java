@@ -1,43 +1,39 @@
 package ru.team2.skud.event;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.team2.skud.base.service.BaseEntityService;
 import ru.team2.skud.event.dto.NewEventDto;
-import ru.team2.skud.event.dto.UpdateEventDto;
 import ru.team2.skud.persons.student.StudentService;
 import ru.team2.skud.session.notification.NotificationService;
 
 @Service
-public class EventService extends BaseEntityService<Long, Event, EventRepository, EventMapper, NewEventDto, UpdateEventDto> {
+@RequiredArgsConstructor
+public class EventService {
+
+    private final EventRepository eventRepository;
+    private final EventMapper eventMapper;
 
     private final StudentService studentService;
-
     private final NotificationService notificationService;
 
-    public EventService(EventRepository repository, EventMapper mapper, StudentService studentService, NotificationService notificationService) {
-        super(repository, mapper);
-        this.studentService = studentService;
-        this.notificationService = notificationService;
-    }
-
-    @Override
     public Mono<Event> create(NewEventDto newEventDto) {
-        return super.create(newEventDto).flatMap(this::loadRelations);
-    }
-
-    @Override
-    public Flux<Event> findAll() {
-        return super.findAll(Sort.by(Sort.Direction.DESC, "id"));
-    }
-
-    @Override
-    protected Mono<Event> loadRelations(final Event event) {
-        return super.loadRelations(event)
+        return eventRepository.save(eventMapper.newEventDtoToEvent(newEventDto))
                 .flatMap(this::loadStudentRelation)
+                .flatMap(this::loadStudentDtoRelation)
+                .doOnNext(notificationService::createNotificationsFromEvent);
+    }
+
+    public Mono<Event> findById(Long id) {
+        return eventRepository.findById(id)
+                .flatMap(this::loadStudentDtoRelation)
+                .switchIfEmpty(Mono.error(new EventNotFoundException(id)));
+    }
+
+    public Flux<Event> findAll() {
+        return eventRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
                 .flatMap(this::loadStudentDtoRelation);
     }
 
@@ -48,8 +44,13 @@ public class EventService extends BaseEntityService<Long, Event, EventRepository
     }
 
     private Mono<Event> loadStudentDtoRelation(final Event event) {
+        if (event.getStudent() != null)
+            return Mono.just(event.setStudentDto(
+                    studentService.studentMapper.studentToStudentForEventDto(event.getStudent())));
+
         return Mono.just(event)
-                .map(entity -> entity.setStudentDto(
-                        studentService.mapper.studentToStudentForEventDto(entity.getStudent())));
+                .zipWith(studentService.findStudentByCardId(event.getCardId()))
+                .map(tuple -> tuple.getT1().setStudentDto(
+                        studentService.studentMapper.studentToStudentForEventDto(tuple.getT2())));
     }
 }
