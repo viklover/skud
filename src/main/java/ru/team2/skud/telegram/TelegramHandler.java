@@ -24,4 +24,9 @@ public class TelegramHandler {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(telegramService.newMessage(message), ResponseMessage.class));
     }
+
+    public Mono<ServerResponse> sendSavedNotifications(ServerRequest serverRequest) {
+        telegramService.sendSavedNotifications();
+        return ServerResponse.ok().build();
+    }
 }

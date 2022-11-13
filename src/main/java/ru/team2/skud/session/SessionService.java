@@ -29,7 +29,10 @@ public class SessionService {
     }
 
     public Flux<Session> findUserSessionByListParentIds(List<Long> parentIdsList) {
-        return userSessionRepository.findUserSessionByParentIdIn(parentIdsList);
+        return userSessionRepository.findUserSessionByParentIdIn(parentIdsList)
+                .flatMap(session ->
+                    parentService.findById(session.getParentId()).map(session::setParent)
+                );
     }
 
     public Mono<Boolean> existsSessionByPlatformAndSessionId(PlatformType platform, Long id) {

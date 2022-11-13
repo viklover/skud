@@ -3,7 +3,6 @@ package ru.team2.skud.config.webclient;
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +19,8 @@ import java.util.concurrent.TimeUnit;
 public class WebClientConfig {
 
     @Value("${telegram.url}")
-    public static String TELEGRAM_BASE_URL;
+    public String TELEGRAM_BASE_URL;
+
     public static final int TIMEOUT = 1000;
 
     public TcpClient createTcpClient() {
@@ -34,7 +34,6 @@ public class WebClientConfig {
     }
 
     @Bean
-    @Qualifier("telegram-webclient")
     public WebClient webClientTelegram() {
         return WebClient.builder()
                 .baseUrl(TELEGRAM_BASE_URL)

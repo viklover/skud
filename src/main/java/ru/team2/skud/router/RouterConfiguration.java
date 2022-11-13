@@ -61,6 +61,7 @@ public class RouterConfiguration {
     public RouterFunction<ServerResponse> routeUserSessionChannels() {
         return route()
                 .POST("/notify/telegram", telegramHandler::processMessage)
+                .POST("/notify/telegram/init", telegramHandler::sendSavedNotifications)
                 .build();
     }
 }

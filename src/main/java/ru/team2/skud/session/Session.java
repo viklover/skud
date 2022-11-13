@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
+import ru.team2.skud.persons.parent.Parent;
 import ru.team2.skud.session.config.SessionConfig;
 import ru.team2.skud.session.platform.PlatformType;
 
@@ -20,7 +21,8 @@ public class Session {
 
     @JsonProperty("parent_id")
     private Long parentId;
-    
+
+    @JsonProperty("session_id")
     private Long sessionId;
 
     private PlatformType platform;
@@ -32,4 +34,8 @@ public class Session {
     @Transient
     @JsonProperty("config")
     private SessionConfig sessionConfig;
+
+    @Transient
+    @JsonIgnore
+    private Parent parent;
 }

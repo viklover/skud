@@ -23,28 +23,28 @@ public class EventService {
         return Mono.just(newEventDto).zipWith(studentService.findStudentByCardId(newEventDto.getCardId()))
                 .map(tuple -> eventMapper.newEventDtoToEvent(tuple.getT1()).setStudentId(tuple.getT2().getId()))
                 .flatMap(eventRepository::save)
-                .flatMap(this::loadStudentDtoRelation);
+                .flatMap(this::loadStudent)
+                .doOnNext(notificationService::initNotifications);
     }
 
     public Mono<Event> findById(Long id) {
         return eventRepository.findById(id)
-                .flatMap(this::loadStudentDtoRelation)
+                .flatMap(this::loadStudent)
                 .switchIfEmpty(Mono.error(new EventNotFoundException(id)));
     }
 
     public Flux<Event> findAll() {
         return eventRepository.findAll(Sort.by(Sort.Direction.DESC, "id"))
-                .flatMap(this::loadStudentDtoRelation);
+                .flatMap(this::loadStudent);
     }
 
-    private Mono<Event> loadStudentDtoRelation(final Event event) {
-        if (event.getStudent() != null)
-            return Mono.just(event.setStudentDto(
-                    studentService.studentMapper.studentToStudentForEventDto(event.getStudent())));
-
+    private Mono<Event> loadStudent(final Event event) {
         return Mono.just(event)
                 .zipWith(studentService.findById(event.getStudentId()))
-                .map(tuple -> tuple.getT1().setStudentDto(
-                        studentService.studentMapper.studentToStudentForEventDto(tuple.getT2())));
+                .map(tuple -> {
+                    return tuple.getT1().setStudent(tuple.getT2()).setStudentDto(
+                            studentService.studentMapper.studentToStudentForEventDto(event.getStudent())
+                    );
+                });
     }
 }

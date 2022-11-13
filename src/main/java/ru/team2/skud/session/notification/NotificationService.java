@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.team2.skud.event.Event;
-import ru.team2.skud.persons.parent.ParentService;
+import ru.team2.skud.model.PersistableImpl;
 import ru.team2.skud.session.Session;
 import ru.team2.skud.session.SessionService;
+import ru.team2.skud.session.platform.PlatformType;
+import ru.team2.skud.telegram.TelegramClient;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -19,25 +19,44 @@ import java.util.stream.Collectors;
 public class NotificationService {
 
     private final NotificationRepository notificationRepository;
-    private final NotificationFactory notificationFactory;
     private final SessionService userSessionService;
-    private final ParentService parentService;
+
+    private final TelegramClient telegramClient;
 
     public void initNotifications(Event event) {
-        List<Notification> notificationsList = new ArrayList<Notification>();
 
-        Flux<Session> userSessions = userSessionService.findUserSessionByListParentIds(
-                event.getStudent().getParents().stream().map(parent -> parent.getId()).collect(Collectors.toList()));
+        Flux<Session> userSessions = userSessionService.findUserSessionByListParentIds(event.getStudent()
+                .getParents().stream().map(PersistableImpl::getId).collect(Collectors.toList()));
 
-        userSessions.doOnEach(sessions -> {
-            Mono.fromSupplier(sessions).doOnNext(session -> {
-                notificationsList.add(NotificationFactory.create(event, session));
+        userSessions.map(session ->
+                NotificationFactory.create(event, session)).map(notification -> {
+
+            sendNotification(notification).doOnNext(bool -> {
+                if (!bool) {
+                    notificationRepository.save(notification).subscribe();
+                }
             }).subscribe();
+
+            return notification;
+
         }).subscribe();
+    }
 
-        // TODO: SAVE NOTIFICAITONS
+    private Mono<Boolean> sendNotification(Notification notification) {
 
-//        for (Notification notification : notificationsList)
-//            notificationRepository.save(notification).subscribe();
+        switch (notification.getUserSession().getPlatform()) {
+            case TELEGRAM:
+                return telegramClient.sendNotification(notification);
+        }
+
+        return Mono.just(false);
+    }
+
+    public Flux<Notification> findAllByPlatformType(PlatformType platformType) {
+        return notificationRepository.findAllByPlatformType(platformType);
+    }
+
+    public Mono<Void> deleteById(Long id) {
+        return notificationRepository.deleteById(id);
     }
 }
