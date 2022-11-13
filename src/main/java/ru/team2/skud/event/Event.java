@@ -18,13 +18,13 @@ import ru.team2.skud.persons.student.dto.StudentForEventDto;
 @Table("event")
 public class Event extends PersistableImpl<Long> {
 
-    @JsonProperty("card_id")
-    private Long cardId;
-
     private Long date;
 
     @JsonProperty("event_type")
     private EventType eventType;
+
+    @JsonIgnore
+    private String studentId;
 
     @Transient
     @JsonProperty("student")

@@ -33,6 +33,10 @@ public class Student extends PersistableImpl<String> {
 
     @JsonProperty("last_name")
     private String lastName;
+    
+    @Transient
+    @JsonProperty("in_college")
+    private boolean inCollege;
 
     @Transient
     @JsonProperty("parents")

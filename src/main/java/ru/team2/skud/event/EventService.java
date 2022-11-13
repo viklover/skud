@@ -20,10 +20,10 @@ public class EventService {
     private final NotificationService notificationService;
 
     public Mono<Event> create(NewEventDto newEventDto) {
-        return eventRepository.save(eventMapper.newEventDtoToEvent(newEventDto))
-                .flatMap(this::loadStudentRelation)
-                .flatMap(this::loadStudentDtoRelation)
-                .doOnNext(notificationService::initNotifications);
+        return Mono.just(newEventDto).zipWith(studentService.findStudentByCardId(newEventDto.getCardId()))
+                .map(tuple -> eventMapper.newEventDtoToEvent(tuple.getT1()).setStudentId(tuple.getT2().getId()))
+                .flatMap(eventRepository::save)
+                .flatMap(this::loadStudentDtoRelation);
     }
 
     public Mono<Event> findById(Long id) {
@@ -37,19 +37,13 @@ public class EventService {
                 .flatMap(this::loadStudentDtoRelation);
     }
 
-    private Mono<Event> loadStudentRelation(final Event event) {
-        return Mono.just(event)
-                .zipWith(studentService.findStudentByCardId(event.getCardId()))
-                .map(result -> result.getT1().setStudent(result.getT2()));
-    }
-
     private Mono<Event> loadStudentDtoRelation(final Event event) {
         if (event.getStudent() != null)
             return Mono.just(event.setStudentDto(
                     studentService.studentMapper.studentToStudentForEventDto(event.getStudent())));
 
         return Mono.just(event)
-                .zipWith(studentService.findStudentByCardId(event.getCardId()))
+                .zipWith(studentService.findById(event.getStudentId()))
                 .map(tuple -> tuple.getT1().setStudentDto(
                         studentService.studentMapper.studentToStudentForEventDto(tuple.getT2())));
     }
