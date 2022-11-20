@@ -22,5 +22,5 @@ create table notification
     user_session_id bigint                            not null,
     was_sent        boolean default false,
     payload         text,
-    foreign key (user_session_id) references user_session (id)
+    foreign key (user_session_id) references user_session (id) on delete cascade
 );
