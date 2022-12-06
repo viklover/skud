@@ -21,6 +21,9 @@ public class WebClientConfig {
     @Value("${telegram.url}")
     public String TELEGRAM_BASE_URL;
 
+    @Value("${sms.url}")
+    public String SMS_BASE_URL;
+
     public static final int TIMEOUT = 1000;
 
     public TcpClient createTcpClient() {
@@ -33,10 +36,18 @@ public class WebClientConfig {
                 });
     }
 
-    @Bean
+    @Bean("webClientTelegram")
     public WebClient webClientTelegram() {
         return WebClient.builder()
                 .baseUrl(TELEGRAM_BASE_URL)
+                .clientConnector(new ReactorClientHttpConnector(HttpClient.from(createTcpClient())))
+                .build();
+    }
+
+    @Bean("webClientSms")
+    public WebClient webClientSms() {
+        return WebClient.builder()
+                .baseUrl(SMS_BASE_URL)
                 .clientConnector(new ReactorClientHttpConnector(HttpClient.from(createTcpClient())))
                 .build();
     }

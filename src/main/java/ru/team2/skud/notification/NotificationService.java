@@ -1,4 +1,4 @@
-package ru.team2.skud.session.notification;
+package ru.team2.skud.notification;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,6 +9,7 @@ import ru.team2.skud.model.PersistableImpl;
 import ru.team2.skud.session.Session;
 import ru.team2.skud.session.SessionService;
 import ru.team2.skud.session.platform.PlatformType;
+import ru.team2.skud.sms.SmsClient;
 import ru.team2.skud.telegram.TelegramClient;
 
 import java.util.stream.Collectors;
@@ -22,6 +23,7 @@ public class NotificationService {
     private final SessionService userSessionService;
 
     private final TelegramClient telegramClient;
+    private final SmsClient smsClient;
 
     public void initNotifications(Event event) {
 
@@ -45,6 +47,8 @@ public class NotificationService {
     private Mono<Boolean> sendNotification(Notification notification) {
 
         switch (notification.getUserSession().getPlatform()) {
+            case SMS:
+                return smsClient.sendNotification(notification);
             case TELEGRAM:
                 return telegramClient.sendNotification(notification);
         }

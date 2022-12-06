@@ -1,26 +1,26 @@
-package ru.team2.skud.telegram;
+package ru.team2.skud.sms;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 import ru.team2.skud.notification.Notification;
 import ru.team2.skud.model.response.Response;
-import reactor.core.publisher.Mono;
 
 @Service
-@AllArgsConstructor
-public class TelegramClient {
+@RequiredArgsConstructor
+public class SmsClient {
 
-    @Qualifier("webClientTelegram")
-    private final WebClient webClientTelegram;
+    @Qualifier("webClientSms")
+    private final WebClient webClientSms;
 
     public Mono<Boolean> sendNotification(Notification notification) {
-        return webClientTelegram.post()
+        return webClientSms.post()
                 .uri("/event")
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(Mono.just(notification.getContent()), String.class)
+                .body(Mono.just(notification.getContent()), Integer.class)
                 .retrieve()
                 .bodyToMono(Response.class)
                 .map(response -> response.wasSent)

@@ -1,4 +1,4 @@
-package ru.team2.skud.session.notification;
+package ru.team2.skud.notification;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,9 +18,6 @@ public class Notification {
     private NotificationType type;
 
     private String content;
-
-    @JsonProperty("was_sent")
-    private boolean wasSent;
 
     private String payload;
 

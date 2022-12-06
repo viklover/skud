@@ -20,7 +20,6 @@ create table notification
     type            text                              not null,
     content         text                              not null,
     user_session_id bigint                            not null,
-    was_sent        boolean default false,
     payload         text,
     foreign key (user_session_id) references user_session (id) on delete cascade
 );

@@ -1,4 +1,4 @@
-package ru.team2.skud.session.request;
+package ru.team2.skud.util;
 
 import java.util.Optional;
 

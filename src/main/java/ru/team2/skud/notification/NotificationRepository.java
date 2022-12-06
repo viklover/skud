@@ -1,4 +1,4 @@
-package ru.team2.skud.session.notification;
+package ru.team2.skud.notification;
 
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;

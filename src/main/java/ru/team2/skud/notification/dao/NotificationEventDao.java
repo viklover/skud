@@ -1,4 +1,4 @@
-package ru.team2.skud.session.notification.dao;
+package ru.team2.skud.notification.dao;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

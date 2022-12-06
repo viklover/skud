@@ -1,4 +1,4 @@
-package ru.team2.skud.telegram.response;
+package ru.team2.skud.model.response;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

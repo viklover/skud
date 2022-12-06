@@ -3,7 +3,7 @@ package ru.team2.skud.session;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
-import ru.team2.skud.session.request.MessageParser;
+import ru.team2.skud.util.MessageParser;
 import ru.team2.skud.persons.parent.ParentService;
 import ru.team2.skud.session.request.NewMessage;
 import ru.team2.skud.session.request.ResponseMessage;

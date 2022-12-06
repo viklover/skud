@@ -8,7 +8,8 @@ create table event
 (
     id         integer primary key auto_increment,
     student_id varchar(8)  not null,
-    date       bigint,
+    timestamp  bigint,
+    date       varchar(9),
     event_type varchar(64) not null
 );
 

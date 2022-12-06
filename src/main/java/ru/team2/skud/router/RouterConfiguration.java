@@ -9,6 +9,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import ru.team2.skud.event.EventHandler;
 import ru.team2.skud.persons.parent.ParentHandler;
 import ru.team2.skud.persons.student.StudentHandler;
+import ru.team2.skud.sms.SmsHandler;
 import ru.team2.skud.telegram.TelegramHandler;
 
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
@@ -21,6 +22,8 @@ public class RouterConfiguration {
     private final EventHandler eventsHandler;
     private final ParentHandler parentsHandler;
     private final StudentHandler studentHandler;
+
+    private final SmsHandler smsHandler;
     private final TelegramHandler telegramHandler;
 
     @Bean
@@ -58,8 +61,10 @@ public class RouterConfiguration {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> routeUserSessionChannels() {
+    public RouterFunction<ServerResponse> routeServices() {
         return route()
+                .POST("/notify/sms", smsHandler::processMessage)
+                .POST("/notify/sms/init", smsHandler::sendSavedNotifications)
                 .POST("/notify/telegram", telegramHandler::processMessage)
                 .POST("/notify/telegram/init", telegramHandler::sendSavedNotifications)
                 .build();

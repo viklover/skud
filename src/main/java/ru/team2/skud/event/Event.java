@@ -18,7 +18,9 @@ import ru.team2.skud.persons.student.dto.StudentForEventDto;
 @Table("event")
 public class Event extends PersistableImpl<Long> {
 
-    private Long date;
+    private String date;
+
+    private Long timestamp;
 
     @JsonProperty("event_type")
     private EventType eventType;
