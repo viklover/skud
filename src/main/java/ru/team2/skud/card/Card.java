@@ -1,16 +1,8 @@
 package ru.team2.skud.card;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
+import ru.team2.skud.model.PersistableImpl;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Table("card")
-public class Card {
-    @Id
-    private Long id;
+public class Card extends PersistableImpl<Long> {
 }
