@@ -174,3 +174,5 @@ fabric.properties
 
 src/main/resources/configs/*
 !src/main/resources/configs/.gitkeep
+!src/main/resources/configs/database.properties.example
+!src/main/resources/configs/services.properties.example

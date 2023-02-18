@@ -1,0 +1,7 @@
+driver=mysql
+database=
+host=
+port=
+user=
+password=
+timezone=
